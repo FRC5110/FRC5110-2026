@@ -1,0 +1,49 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Ball Side - Double Shoot 1.1 Final"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoGetDistanceShootFeed2p5s"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AuxASetIntakeArmBottom"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Ball Side - Double Shoot 1.2 Final"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Ball Side - Double Shoot 1.3 Final"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoGetDistanceShootFeed2p5s"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Finals",
+  "choreoAuto": false
+}

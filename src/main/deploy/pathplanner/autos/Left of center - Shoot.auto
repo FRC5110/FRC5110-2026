@@ -1,0 +1,25 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left of center - Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoGetDistanceShootFeed2p5s"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Version Tests",
+  "choreoAuto": false
+}
