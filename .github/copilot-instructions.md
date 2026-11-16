@@ -1,0 +1,7 @@
+- Target WPILib 2026.2.1 on roboRIO. Language: Java.
+- Use edu.wpi.first packages and frc:: namespaces. Do not use 2027 APIs.
+- Use docs.wpilib.org/en/stable, not /en/latest.
+- Check APIs against existing code, build.gradle, and vendordeps/. Don't invent vendor APIs.
+- Verify with ./gradlew build, and ./gradlew test if tests exist.
+- Never run ./gradlew deploy. Ask before changing vendordeps/ or build.gradle.
+- Flag any change to motor direction, current limits, or soft limits.
