@@ -15,17 +15,12 @@ public final class Constants {
 
     public static final class CanIds {
         public static final int INTAKE_ROLLER = 14;
-        //retire 15
         public static final int CONVEYOR_ARM_LEADER = 20;
         public static final int CONVEYOR_ARM_FOLLOWER = 21;
         public static final int CONVEYOR = 16;
         public static final int SHOOTER_FEED_WHEEL = 19;
         public static final int SHOOTER_FLYWHEEL_LEADER = 32;
         public static final int SHOOTER_FLYWHEEL_FOLLOWER = 33;
-        // Legacy aliases retained so older code paths still compile.
-        public static final int SHOOTER_FLYWHEEL_LEADER_KRAKEN = SHOOTER_FLYWHEEL_LEADER;
-        public static final int SHOOTER_FLYWHEEL_FOLLOWER_KRAKEN = SHOOTER_FLYWHEEL_FOLLOWER;
-        //public static final int CLIMBER_MOTOR = 18;
 
         public static final int PIGEON2 = 13;
 
@@ -50,12 +45,10 @@ public final class Constants {
 
     public static final class PwmPorts {
         public static final int BLINKIN = 1;
-        public static final int CLIMBER_LATCH_SERVO = 0;
 
         private PwmPorts() {}
     }
 
-    
     public static final class Vision {
         public static final class Front {
             public static final String LIMELIGHT_NAME = "limelight";
@@ -161,10 +154,10 @@ public final class Constants {
         public static final double LIMELIGHT_HUB_MAX_AVG_TAG_DIST_DEFAULT = 7.0;
         public static final double HUB_SINGLE_TAG_CENTER_OFFSET_METERS_DEFAULT = 0.1524;
         public static final double CONVEYOR_HOLD_POWER_DEFAULT = 0.0;
-   
+
         //**************************************************************************
         //Tuners for Shoot/Conveyor coordination
-        //************************************************************************** 
+        //**************************************************************************
         public static final double FEED_READY_TOL_RPM_DEFAULT = 175.0;
         public static final double FEED_READY_STABLE_SEC_DEFAULT = 0.08;
         public static final double FEED_RPM_FILTER_ALPHA_DEFAULT = 0.30;
@@ -172,7 +165,7 @@ public final class Constants {
         public static final double FEED_PACKET_SEC_DEFAULT = 0.22;
         public static final double FEED_RECOVERY_MIN_SEC_DEFAULT = 0.06;
         public static final boolean PAUSE_FEED_WHEN_BOOST_DEFAULT = true;
-        
+
         public static final double PID_P_DEFAULT = 0.004;//changed from 6
         public static final double PID_I_DEFAULT = 0.0;
         public static final double PID_D_DEFAULT = 0.0;
@@ -216,8 +209,6 @@ public final class Constants {
         public static final double FEED_WHEEL_HEALTH_FAULT_DELAY_SEC_DEFAULT = 0.25;
         public static final double TELEMETRY_PUBLISH_SEC_DEFAULT = 0.1;
 
-
-
         public static final double SYSID_RAMP_RATE_VOLTS_PER_SEC_DEFAULT = 1.0;
         public static final double SYSID_STEP_VOLTAGE_DEFAULT = 7.0;
         public static final double SYSID_TIMEOUT_SEC_DEFAULT = 10.0;
@@ -226,14 +217,12 @@ public final class Constants {
         public static final double MAX_RPM_DEFAULT = 6200.0;
         public static final boolean FOLLOWER_INVERTED_DEFAULT = false;
 
-        
-
         public static final double FEED_DROPOUT_TOL_RPM_DEFAULT = 325.0;
         //Adjust the shooting RPM speed (+/-) based on what we are seeing on the field
         public static final double DISTANCE_RPM_TRIM_DEFAULT = 0.0;
 
         public static final double[] DISTANCE_POINT_METERS_DEFAULTS = {
-            1.5, 2.3, 2.65, 2.85, 3.1, 3.4, 3.7 
+            1.5, 2.3, 2.65, 2.85, 3.1, 3.4, 3.7
         };
         public static final double[] RPM_POINT_DEFAULTS = {
             1650, 2050, 2175, 2200, 2400, 2600, 3100
@@ -306,7 +295,6 @@ public final class Constants {
         public static final double HEADING_HOLD_TOLERANCE_DEG = 1.5;
 
         public static final double DEADBAND = 0.10;
-        public static final double CLIMBER_MAX_OUTPUT = 0.6;
         public static final double TRIGGER_DEADBAND = 0.05;
         public static final double TEST_SHOOT_RPM = 3520.0; //max rpm is 6784
         public static final double SHOOT_CONVEYOR_PERCENT = 0.30;
