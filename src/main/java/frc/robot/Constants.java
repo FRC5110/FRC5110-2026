@@ -15,6 +15,7 @@ public final class Constants {
 
     public static final class CanIds {
         public static final int INTAKE_ROLLER = 14;
+        //retire 15
         public static final int CONVEYOR_ARM_LEADER = 20;
         public static final int CONVEYOR_ARM_FOLLOWER = 21;
         public static final int CONVEYOR = 16;
@@ -90,29 +91,12 @@ public final class Constants {
     public static final class ShooterTune {
         public static final String AT_SPEED_TOL_RPM_KEY = "Shooter/Tune/AtSpeedTolRPM";
         public static final String AT_SPEED_STABLE_SEC_KEY = "Shooter/Tune/AtSpeedStableSec";
-        public static final String BOOST_ENABLED_KEY = "Shooter/Tune/BoostEnabled";
-        public static final String BOOST_VOLTS_REQUESTED_KEY = "Shooter/Tune/BoostVoltsRequested";
-        public static final String BOOST_ENTER_ERROR_RPM_KEY = "Shooter/Tune/BoostEnterErrorRPM";
-        public static final String BOOST_EXIT_ERROR_RPM_KEY = "Shooter/Tune/BoostExitErrorRPM";
-        public static final String HANDOFF_TIME_SEC_KEY = "Shooter/Tune/HandoffTimeSec";
-        public static final String MIN_SLOPE_RPM_PER_SEC_KEY = "Shooter/Tune/MinSlopeRPMperSec";
-        public static final String V_BAT_HIGH_KEY = "Shooter/Tune/VbatHigh";
-        public static final String V_BAT_MID_KEY = "Shooter/Tune/VbatMid";
-        public static final String V_BAT_LOW_KEY = "Shooter/Tune/VbatLow";
-        public static final String BOOST_MAX_AT_HIGH_V_KEY = "Shooter/Tune/BoostMaxAtHighV";
-        public static final String BOOST_MAX_AT_MID_V_KEY = "Shooter/Tune/BoostMaxAtMidV";
-        public static final String BOOST_MAX_AT_LOW_V_KEY = "Shooter/Tune/BoostMaxAtLowV";
-        public static final String BOOST_MAX_AT_VERY_LOW_V_KEY = "Shooter/Tune/BoostMaxAtVeryLowV";
-        public static final String OVERRIDE_ENABLED_KEY = "Shooter/Tune/OverrideEnabled";
-        public static final String OVERRIDE_RPM_KEY = "Shooter/Tune/OverrideRPM";
         public static final String PRESET_SHOT_RPM_KEY = "Shooter/Tune/PresetShotRPM";
-        public static final String USE_DISTANCE_RPM_KEY = "Shooter/Tune/UseDistanceRPM";
         public static final String LIMELIGHT_HUB_DISTANCE_ALPHA_KEY = "Shooter/Tune/LimelightHubDistanceAlpha";
         public static final String LIMELIGHT_HUB_MIN_TAGS_KEY = "Shooter/Tune/LimelightHubMinTags";
         public static final String LIMELIGHT_HUB_MAX_AVG_TAG_DIST_KEY = "Shooter/Tune/LimelightHubMaxAvgTagDistM";
         public static final String HUB_SINGLE_TAG_CENTER_OFFSET_METERS_KEY =
             "Shooter/Tune/HubSingleTagCenterOffsetMeters";
-        public static final String PAUSE_FEED_WHEN_BOOST_KEY = "Shooter/Tune/PauseFeedWhenBoost";
         public static final String CONVEYOR_FEED_POWER_KEY = "Shooter/Tune/ConveyorFeedPower";
         public static final String CONVEYOR_HOLD_POWER_KEY = "Shooter/Tune/ConveyorHoldPower";
         public static final String FEED_READY_STABLE_SEC_KEY = "Shooter/Tune/FeedReadyStableSec";
@@ -132,32 +116,13 @@ public final class Constants {
 
         public static final double AT_SPEED_TOL_RPM_DEFAULT = 125.0;
         public static final double AT_SPEED_STABLE_SEC_DEFAULT = 0.03;
-        public static final boolean BOOST_ENABLED_DEFAULT = false;
-        public static final double BOOST_VOLTS_REQUESTED_DEFAULT = 8.5;
-        public static final double BOOST_ENTER_ERROR_RPM_DEFAULT = 225.0;
-        public static final double BOOST_EXIT_ERROR_RPM_DEFAULT = 90.0;
-        public static final double HANDOFF_TIME_SEC_DEFAULT = 0.08;
-        public static final double MIN_SLOPE_RPM_PER_SEC_DEFAULT = 250.0;
-        public static final double V_BAT_HIGH_DEFAULT = 12.0;
-        public static final double V_BAT_MID_DEFAULT = 11.2;
-        public static final double V_BAT_LOW_DEFAULT = 10.5;
-        public static final double BOOST_MAX_AT_HIGH_V_DEFAULT = 11.5;
-        public static final double BOOST_MAX_AT_MID_V_DEFAULT = 10.5;
-        public static final double BOOST_MAX_AT_LOW_V_DEFAULT = 9.0;
-        public static final double BOOST_MAX_AT_VERY_LOW_V_DEFAULT = 7.0;
-        public static final boolean OVERRIDE_ENABLED_DEFAULT = false;
-        public static final double OVERRIDE_RPM_DEFAULT = RobotContainer.TEST_SHOOT_RPM;
         public static final double PRESET_SHOT_RPM_DEFAULT = RobotContainer.TEST_SHOOT_RPM;
-        public static final boolean USE_DISTANCE_RPM_DEFAULT = false;
         public static final double LIMELIGHT_HUB_DISTANCE_ALPHA_DEFAULT = 0.35;
         public static final int LIMELIGHT_HUB_MIN_TAGS_DEFAULT = 1;
         public static final double LIMELIGHT_HUB_MAX_AVG_TAG_DIST_DEFAULT = 7.0;
         public static final double HUB_SINGLE_TAG_CENTER_OFFSET_METERS_DEFAULT = 0.1524;
         public static final double CONVEYOR_HOLD_POWER_DEFAULT = 0.0;
 
-        //**************************************************************************
-        //Tuners for Shoot/Conveyor coordination
-        //**************************************************************************
         public static final double FEED_READY_TOL_RPM_DEFAULT = 175.0;
         public static final double FEED_READY_STABLE_SEC_DEFAULT = 0.08;
         public static final double FEED_RPM_FILTER_ALPHA_DEFAULT = 0.30;
@@ -166,15 +131,9 @@ public final class Constants {
         public static final double FEED_RECOVERY_MIN_SEC_DEFAULT = 0.06;
         public static final boolean PAUSE_FEED_WHEN_BOOST_DEFAULT = true;
 
-        public static final double PID_P_DEFAULT = 0.004;//changed from 6
+        public static final double PID_P_DEFAULT = 0.004;
         public static final double PID_I_DEFAULT = 0.0;
         public static final double PID_D_DEFAULT = 0.0;
-        // SysId-style feedforward constants are stored in rotations/sec units.
-        // Current shooter compatibility mode actively applies only kV through Spark velocityFF.
-        // kS and kA are retained for documentation and future software feedforward work.
-        public static final double FEEDFORWARD_KS_VOLTS_DEFAULT = 0.086036;
-        public static final double FEEDFORWARD_KV_VOLTS_PER_RPS_DEFAULT = 0.11221;
-        public static final double FEEDFORWARD_KA_VOLTS_PER_RPS2_DEFAULT = 0.034568;
 
         public static final boolean FLYWHEEL_LEADER_INVERTED_DEFAULT = true;
         public static final boolean FLYWHEEL_FOLLOWER_OPPOSES_LEADER_DEFAULT = true;
@@ -218,7 +177,6 @@ public final class Constants {
         public static final boolean FOLLOWER_INVERTED_DEFAULT = false;
 
         public static final double FEED_DROPOUT_TOL_RPM_DEFAULT = 325.0;
-        //Adjust the shooting RPM speed (+/-) based on what we are seeing on the field
         public static final double DISTANCE_RPM_TRIM_DEFAULT = 0.0;
 
         public static final double[] DISTANCE_POINT_METERS_DEFAULTS = {
@@ -227,10 +185,6 @@ public final class Constants {
         public static final double[] RPM_POINT_DEFAULTS = {
             1650, 2050, 2175, 2200, 2400, 2600, 3100
         };
-        public static final int SHOOT_THREE_FIRST_FUEL_COUNT_DEFAULT = 3;
-        public static final double SHOOT_THREE_CONVEYOR_ROTATIONS_PER_FUEL_DEFAULT = 1.0;
-        public static final double SHOOT_THREE_ARM_DOWN_SETPOINT_ROT_DEFAULT = -13300.0 / 360.0;
-        public static final double SHOOT_THREE_ARM_TOLERANCE_ROT_DEFAULT = 0.02;
 
         public static String distancePointMetersKey(int index) {
             return DISTANCE_POINT_METERS_KEY_PREFIX + (index + 1);
@@ -291,7 +245,7 @@ public final class Constants {
         public static final double DRIVER_ROTATION_INVERT = -1.0;
         // DEBUG_TELEOP_FRONT: Mechanical/vision front is the shooter side,
         // but the driver wants teleop heading commands to feel intake-front.
-        public static final double DRIVER_TELEOP_FRONT_OFFSET_DEG = 0; //180.0; changed to 0 on 3/24
+        public static final double DRIVER_TELEOP_FRONT_OFFSET_DEG = 0;
         public static final double HEADING_HOLD_TOLERANCE_DEG = 1.5;
 
         public static final double DEADBAND = 0.10;
