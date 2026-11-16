@@ -95,9 +95,9 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
     private boolean characterizationMode = false;
     private boolean flywheelVoltageFallbackActive = false;
     private boolean flywheelFallbackWarningReported = false;
-    private double rpmSlope = 0.0;
-    private double lastRPM = 0.0;
-    private double lastTimestampSec = 0.0;
+    //private double rpmSlope = 0.0;
+    //private double lastRPM = 0.0;
+    //private double lastTimestampSec = 0.0;
     private double atSpeedStartSec = Double.NaN;
     private boolean atSpeedReady = false;
     private double filteredFlywheelRPM = 0.0;
@@ -185,8 +185,8 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
         refreshDistanceTableFromConstants();
         refreshFlywheelSignals();
         feedWheelCurrentRPM = feedWheelAvailable ? readFeedWheelWheelRpm() : 0.0;
-        lastTimestampSec = Timer.getFPGATimestamp();
-        lastRPM = flywheelCurrentRPM;
+        //lastTimestampSec = Timer.getFPGATimestamp();
+        //lastRPM = flywheelCurrentRPM;
         filteredFlywheelRPM = flywheelCurrentRPM;
 
         shooterSysIdRoutine = new SysIdRoutine(
@@ -384,15 +384,15 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
         double nowSec = Timer.getFPGATimestamp();
         double currentRPM = flywheelCurrentRPM;
 
-        updateSlope(nowSec, currentRPM);
+//        updateSlope(nowSec, currentRPM);
         updateFlywheelReadyFilter(currentRPM);
 
         if (DriverStation.isDisabled() && !controlEnabled && !characterizationMode) {
             activeTargetRPM = 0.0;
             feedWheelTargetRPM = 0.0;
             usingBoost = false;
-            lastTimestampSec = nowSec;
-            lastRPM = currentRPM;
+            //lastTimestampSec = nowSec;
+            //lastRPM = currentRPM;
             filteredFlywheelRPM = currentRPM;
             resetAtSpeedState();
             resetFeedReadyState(currentRPM);
@@ -427,7 +427,7 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
             stopFeedWheelOutput();
             stopFlywheelOutput();
         } else {
-            activeTargetRPM = getActiveTargetRPM();
+            activeTargetRPM = requestedTargetRPM;
             feedWheelTargetRPM = computeClampedFeedWheelTargetRPM(activeTargetRPM);
             runControlLoop(activeTargetRPM, feedWheelTargetRPM);
             updateAtSpeedState(nowSec, currentRPM);
@@ -588,13 +588,13 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
         return true;
     }
 
-    private double getActiveTargetRPM() {
-        if (!Constants.ShooterTune.OVERRIDE_ENABLED_DEFAULT) {
-            return requestedTargetRPM;
-        }
+    // private double getActiveTargetRPM() {
+    //     if (!Constants.ShooterTune.OVERRIDE_ENABLED_DEFAULT) {
+    //         return requestedTargetRPM;
+    //     }
 
-        return clampToConfiguredRange(Constants.ShooterTune.OVERRIDE_RPM_DEFAULT);
-    }
+    //     return clampToConfiguredRange(Constants.ShooterTune.OVERRIDE_RPM_DEFAULT);
+    // }
 
     private void runControlLoop(double flywheelTargetRPM, double feedWheelTargetRPM) {
         if (!flywheelLeaderAvailable || Math.abs(flywheelTargetRPM) < MIN_COMMAND_RPM) {
@@ -662,16 +662,16 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
         );
     }
 
-    private void updateSlope(double nowSec, double currentRPM) {
-        double dtSec = nowSec - lastTimestampSec;
-        if (dtSec > 1e-4) {
-            rpmSlope = (currentRPM - lastRPM) / dtSec;
-        } else {
-            rpmSlope = 0.0;
-        }
-        lastTimestampSec = nowSec;
-        lastRPM = currentRPM;
-    }
+    // private void updateSlope(double nowSec, double currentRPM) {
+    //     double dtSec = nowSec - lastTimestampSec;
+    //     if (dtSec > 1e-4) {
+    //         rpmSlope = (currentRPM - lastRPM) / dtSec;
+    //     } else {
+    //         rpmSlope = 0.0;
+    //     }
+    //     lastTimestampSec = nowSec;
+    //     lastRPM = currentRPM;
+    // }
 
     private void updateFlywheelReadyFilter(double currentRPM) {
         double alpha = MathUtil.clamp(Constants.ShooterTune.FEED_RPM_FILTER_ALPHA_DEFAULT, 0.0, 1.0);

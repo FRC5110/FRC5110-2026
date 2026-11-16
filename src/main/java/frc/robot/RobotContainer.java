@@ -972,15 +972,15 @@ private Pose2d getAllianceOutpostPose() {
         return presetRPM;
     }
 
-    private double getShootCommandRPM() {
-        boolean useDistanceRPM = Constants.ShooterTune.USE_DISTANCE_RPM_DEFAULT;
+    // private double getShootCommandRPM() {
+    //     boolean useDistanceRPM = Constants.ShooterTune.USE_DISTANCE_RPM_DEFAULT;
 
-        if (useDistanceRPM) {
-            return getDistanceBasedShootRPM();
-        }
+    //     if (useDistanceRPM) {
+    //         return getDistanceBasedShootRPM();
+    //     }
 
-        return getPresetShotRPM();
-    }
+    //     return getPresetShotRPM();
+    // }
 
     private void registerPathPlannerNamedCommands() {
         NamedCommands.registerCommand("NoOp", Commands.none());
