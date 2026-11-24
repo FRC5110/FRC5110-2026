@@ -43,7 +43,6 @@ import frc.robot.commands.auton.RunConveyorForwardAutoCommand;
 import frc.robot.commands.auton.RunConveyorReverseAutoCommand;
 import frc.robot.commands.auton.RunIntakeForwardAutoCommand;
 import frc.robot.commands.auton.RunIntakeReverseAutoCommand;
-import frc.robot.commands.ShootAndFeedWhenReady;
 import frc.robot.commands.AutoGetDistanceShootFeedCommand;
 import frc.robot.commands.SpinShooterAtRpmCommand;
 import frc.robot.commands.auton.TimedShootAndFeedWhenReadyCommand;
@@ -970,16 +969,6 @@ private Pose2d getAllianceOutpostPose() {
         // Realtime dashboard publishing disabled to reduce loop overflows.
         // SmartDashboard.putNumber("AutoShoot/PresetShotRPM", presetRPM);
         return presetRPM;
-    }
-
-    private double getShootCommandRPM() {
-        boolean useDistanceRPM = Constants.ShooterTune.USE_DISTANCE_RPM_DEFAULT;
-
-        if (useDistanceRPM) {
-            return getDistanceBasedShootRPM();
-        }
-
-        return getPresetShotRPM();
     }
 
     private void registerPathPlannerNamedCommands() {

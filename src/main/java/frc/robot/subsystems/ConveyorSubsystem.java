@@ -9,7 +9,6 @@ import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -21,8 +20,6 @@ public class ConveyorSubsystem extends SubsystemBase {
     private final SparkFlex conveyorMotor;
     private final SparkClosedLoopController conveyorVelocityController;
     private double targetRPM = 0.0;
-    private boolean velocityEnabled = false;
-
     @SuppressWarnings("removal")
     public ConveyorSubsystem() {
 
@@ -50,7 +47,6 @@ public class ConveyorSubsystem extends SubsystemBase {
 
     // + forward, - reverse
     public void run(double percent) {
-        velocityEnabled = false;
         targetRPM = 0.0;
         conveyorMotor.set(percent);
     }
@@ -64,7 +60,6 @@ public class ConveyorSubsystem extends SubsystemBase {
             return;
         }
 
-        velocityEnabled = true;
         conveyorVelocityController.setReference(
             targetRPM,
             SparkFlex.ControlType.kVelocity
@@ -80,7 +75,6 @@ public class ConveyorSubsystem extends SubsystemBase {
     }
 
     public void stop() {
-        velocityEnabled = false;
         targetRPM = 0.0;
         conveyorMotor.set(0);
     }

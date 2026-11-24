@@ -9,7 +9,6 @@ import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -21,8 +20,6 @@ public class IntakeRollerSubsystem extends SubsystemBase {
     private final SparkFlex intakeMotor;
     private final SparkClosedLoopController intakeVelocityController;
     private double targetRPM = 0.0;
-    private boolean velocityEnabled = false;
-
     @SuppressWarnings("removal")
     public IntakeRollerSubsystem() {
         intakeMotor = new SparkFlex(Constants.CanIds.INTAKE_ROLLER, MotorType.kBrushless); // rio CAN
@@ -46,7 +43,6 @@ public class IntakeRollerSubsystem extends SubsystemBase {
 
     // + forward, - reverse
     public void run(double percent) {
-        velocityEnabled = false;
         targetRPM = 0.0;
         intakeMotor.set(percent);
     }
@@ -60,7 +56,6 @@ public class IntakeRollerSubsystem extends SubsystemBase {
             return;
         }
 
-        velocityEnabled = true;
         intakeVelocityController.setReference(
             targetRPM,
             SparkFlex.ControlType.kVelocity
@@ -76,7 +71,6 @@ public class IntakeRollerSubsystem extends SubsystemBase {
     }
 
     public void stop() {
-        velocityEnabled = false;
         targetRPM = 0.0;
         intakeMotor.set(0);
     }

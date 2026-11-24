@@ -13,7 +13,6 @@ public class ShootFromDistanceCommand extends Command {
 
     private final ShooterFlywheelSubsystem shooter;
     private final ConveyorSubsystem conveyor;
-    private final DoubleSupplier distanceMetersSupplier;
     private final double conveyorPercent;
     private final ShooterFeedGate feedGate = new ShooterFeedGate();
 
@@ -25,7 +24,6 @@ public class ShootFromDistanceCommand extends Command {
     ) {
         this.shooter = shooter;
         this.conveyor = conveyor;
-        this.distanceMetersSupplier = distanceMetersSupplier;
         this.conveyorPercent = MathUtil.clamp(conveyorPercent, 0.0, 1.0);
 
         addRequirements(shooter, conveyor);
@@ -51,18 +49,13 @@ public class ShootFromDistanceCommand extends Command {
         boolean usingBoost = shooter.isUsingBoost();
         boolean canFeed = feedGate.shouldFeed(shooter);
 
-        String feedState;
         if (canFeed) {
             conveyor.run(feedPower);
-            feedState = "DistanceFeeding";
         } else {
             conveyor.run(holdPower);
             if (usingBoost) {
-                feedState = "DistanceBoosting";
             } else if (shooter.atSpeed()) {
-                feedState = "DistanceReadyHolding";
             } else {
-                feedState = "DistanceSpinningUp";
             }
         }
 

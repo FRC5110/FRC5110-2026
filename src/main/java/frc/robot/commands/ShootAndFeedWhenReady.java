@@ -45,18 +45,13 @@ public class ShootAndFeedWhenReady extends Command {
         boolean usingBoost = shooter.isUsingBoost();
         boolean canFeed = feedGate.shouldFeed(shooter);
 
-        String feedState;
         if (canFeed) {
             conveyor.run(feedPower);
-            feedState = "Feeding";
         } else {
             conveyor.run(holdPower);
             if (usingBoost) {
-                feedState = "Boosting";
             } else if (shooter.atSpeed()) {
-                feedState = "ReadyHolding";
             } else {
-                feedState = "SpinningUp";
             }
         }
 

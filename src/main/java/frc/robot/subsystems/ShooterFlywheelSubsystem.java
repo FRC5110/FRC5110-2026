@@ -95,8 +95,6 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
     private boolean characterizationMode = false;
     private boolean flywheelVoltageFallbackActive = false;
     private boolean flywheelFallbackWarningReported = false;
-    private double rpmSlope = 0.0;
-    private double lastRPM = 0.0;
     private double lastTimestampSec = 0.0;
     private double atSpeedStartSec = Double.NaN;
     private boolean atSpeedReady = false;
@@ -123,7 +121,6 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
     private final boolean flywheelFollowerAvailable;
     private final boolean feedWheelAvailable;
 
-    @SuppressWarnings("removal")
     public ShooterFlywheelSubsystem() {
         flywheelLeaderMotor = new TalonFX(
             Constants.CanIds.SHOOTER_FLYWHEEL_LEADER,
@@ -186,7 +183,6 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
         refreshFlywheelSignals();
         feedWheelCurrentRPM = feedWheelAvailable ? readFeedWheelWheelRpm() : 0.0;
         lastTimestampSec = Timer.getFPGATimestamp();
-        lastRPM = flywheelCurrentRPM;
         filteredFlywheelRPM = flywheelCurrentRPM;
 
         shooterSysIdRoutine = new SysIdRoutine(
@@ -392,7 +388,6 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
             feedWheelTargetRPM = 0.0;
             usingBoost = false;
             lastTimestampSec = nowSec;
-            lastRPM = currentRPM;
             filteredFlywheelRPM = currentRPM;
             resetAtSpeedState();
             resetFeedReadyState(currentRPM);
@@ -641,6 +636,7 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
         );
     }
 
+    @SuppressWarnings("removal")
     private void runFeedWheelVelocityControl(double feedWheelTargetRPM) {
         if (!feedWheelAvailable) {
             stopFeedWheelOutput();
@@ -665,12 +661,9 @@ public class ShooterFlywheelSubsystem extends SubsystemBase {
     private void updateSlope(double nowSec, double currentRPM) {
         double dtSec = nowSec - lastTimestampSec;
         if (dtSec > 1e-4) {
-            rpmSlope = (currentRPM - lastRPM) / dtSec;
         } else {
-            rpmSlope = 0.0;
         }
         lastTimestampSec = nowSec;
-        lastRPM = currentRPM;
     }
 
     private void updateFlywheelReadyFilter(double currentRPM) {

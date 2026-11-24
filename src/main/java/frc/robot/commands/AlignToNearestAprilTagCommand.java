@@ -20,7 +20,6 @@ public class AlignToNearestAprilTagCommand extends Command {
 
     private static final double HEADING_TOLERANCE_RAD = Math.toRadians(2.0);
     private static final double TX_TOLERANCE_DEG = 1.0;
-    private static final int REQUIRED_STABLE_CYCLES = 5;
     private static final double MAX_ROT_RAD_PER_SEC = 5.0;
     private static final String FRONT_LIMELIGHT = Constants.Vision.Front.LIMELIGHT_NAME;
 
@@ -34,7 +33,6 @@ public class AlignToNearestAprilTagCommand extends Command {
         new SwerveRequest.FieldCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
-    private int stableCycles = 0;
     private Integer targetTagId = null;
     private Pose2d targetTagPose = null;
 
@@ -51,8 +49,6 @@ public class AlignToNearestAprilTagCommand extends Command {
 
     @Override
     public void initialize() {
-        stableCycles = 0;
-
         poseHeadingPid.enableContinuousInput(-Math.PI, Math.PI);
         poseHeadingPid.reset();
         txPid.reset();
@@ -86,8 +82,6 @@ public class AlignToNearestAprilTagCommand extends Command {
 
         Pose2d robotPose = drivetrain.getPose();
         double omega;
-        double errorDeg;
-
         if (hasVisibleTargetTag()) {
             double txDeg = LimelightHelpers.getTX(FRONT_LIMELIGHT);
             omega = MathUtil.clamp(
@@ -95,16 +89,14 @@ public class AlignToNearestAprilTagCommand extends Command {
                 -MAX_ROT_RAD_PER_SEC,
                 MAX_ROT_RAD_PER_SEC
             );
-            errorDeg = txDeg;
+            
 
             // Realtime dashboard publishing disabled to reduce loop overflows.
             // SmartDashboard.putString("TagAlign/Source", "LimelightTx");
             // SmartDashboard.putNumber("TagAlign/TxDeg", txDeg);
 
             if (Math.abs(txDeg) <= TX_TOLERANCE_DEG) {
-                stableCycles++;
             } else {
-                stableCycles = 0;
             }
         } else {
             double targetHeading = Math.atan2(
@@ -119,16 +111,14 @@ public class AlignToNearestAprilTagCommand extends Command {
                 -MAX_ROT_RAD_PER_SEC,
                 MAX_ROT_RAD_PER_SEC
             );
-            errorDeg = Math.toDegrees(headingError);
+            Math.toDegrees(headingError);
 
             // Realtime dashboard publishing disabled to reduce loop overflows.
             // SmartDashboard.putString("TagAlign/Source", "PoseFallback");
             // SmartDashboard.putNumber("TagAlign/TxDeg", Double.NaN);
 
             if (Math.abs(headingError) <= HEADING_TOLERANCE_RAD) {
-                stableCycles++;
             } else {
-                stableCycles = 0;
             }
         }
 

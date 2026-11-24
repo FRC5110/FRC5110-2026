@@ -44,6 +44,7 @@ public class AutoShootFeedWhenReadyCommand extends Command {
         SmartDashboard.putNumber("AutoShoot/DurationSec", durationSec);
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void execute() {
         shooter.setTargetRPM(rpmSupplier.getAsDouble());
@@ -51,7 +52,7 @@ public class AutoShootFeedWhenReadyCommand extends Command {
         double feedPower = MathUtil.clamp(Constants.ShooterTune.CONVEYOR_FEED_POWER_DEFAULT, -1.0, 1.0);
         double holdPower = MathUtil.clamp(Constants.ShooterTune.CONVEYOR_HOLD_POWER_DEFAULT, -1.0, 1.0);
         double targetRpm = Math.abs(shooter.getTargetRPM());
-        double currentRpm = Math.abs(shooter.getCurrentRPM());
+        Math.abs(shooter.getCurrentRPM());
         boolean canFeed = feedGate.shouldFeed(shooter);
 
         String feedState;

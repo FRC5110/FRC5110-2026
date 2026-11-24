@@ -51,13 +51,9 @@ public class SpinShooterAtRpmCommand extends Command {
         shooter.setTargetRPM(latchedTargetRpm);
         updateLedAction.run();
 
-        String state;
         if (shooter.isUsingBoost()) {
-            state = "SpinOnlyBoosting";
         } else if (shooter.atSpeed()) {
-            state = "SpinOnlyAtSpeed";
         } else {
-            state = "SpinOnlySpinningUp";
         }
 
         // Realtime dashboard publishing disabled to reduce loop overflows.

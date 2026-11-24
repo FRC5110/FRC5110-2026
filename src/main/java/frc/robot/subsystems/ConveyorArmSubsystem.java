@@ -63,7 +63,6 @@ public class ConveyorArmSubsystem extends SubsystemBase {
     private double requestedPercent = 0.0;
     private double requestedVolts = 0.0;
 
-    @SuppressWarnings("removal")
     public ConveyorArmSubsystem() {
         leaderMotor = new TalonFX(
             Constants.CanIds.CONVEYOR_ARM_LEADER,
@@ -430,7 +429,6 @@ public class ConveyorArmSubsystem extends SubsystemBase {
         }
     }
 
-    @SuppressWarnings("removal")
     private void reportHardwareAvailability() {
         if (!leaderAvailable) {
             DriverStation.reportWarning(
